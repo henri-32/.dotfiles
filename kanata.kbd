@@ -36,7 +36,7 @@
 (deflayer nav 
 	_ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 	_ (multi lctl w) _ _ _ _ _ _ _ f11 _ _ _ _ 
-	_ _ (multi lctl pgup) (multi lctl pgdn) (multi lalt tab) _ _ down up _ _ _ _  
+	_ _ (multi lctl pgup) (multi lctl pgdn) (multi lalt tab) _ _ down up _ _ (multi lctl l) _  
 	_ _ _ _ _ _ _ (multi lctl t) _ _ _ _ _  
   
 	_ _ _ _ _ _ _ 
