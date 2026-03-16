@@ -12,15 +12,16 @@
 )
 
 (defalias
-	capsmod (tap-hold-release 110 110 esc (layer-while-held keys))
+	capsmod (tap-hold-release 140 140 esc (layer-while-held keys))
 	spacemod (tap-hold-release 200 200 spc (layer-while-held nav))
+	<mod (layer-while-held keys)
 )
 
 (deflayer base 
 	_ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 	_ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 	@capsmod _ _ _ _ _ _ _ _ _ _ _ _  
-	_ _ _ _ _ _ _ _ _ _ _ _ _ 
+	_ @<mod _ _ _ _ _ _ _ _ _ _ _ 
 	_ _ _ @spacemod _ _ _ 
 ) 
 	
@@ -28,15 +29,15 @@
 	_ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 	_ _ _ _ _ _ _ (multi ralt 7) (multi ralt 0) (multi lsft 2) ] (multi lsft ]) _ _ 
 	_ _ _ _ _ _ < (multi lsft 8) (multi lsft 9) (multi lsft <) (multi lsft 0) (multi lsft 7) _  
-	_ _ _ _ _ _ _ _ (multi ralt 8) (multi ralt 9) (multi ralt <) (multi lsft 1) _  
+	_ _ (multi ralt -) (multi lsft 4) (multi lsft 5) (multi lsft 6) _ _ (multi ralt 8) (multi ralt 9) (multi ralt <) (multi lsft 1) _  
 	_ _ _ _ _ _ _ 
 )
 
 
 (deflayer nav 
 	_ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-	_ (multi lctl w) _ _ _ _ _ _ _ f11 _ _ _ _ 
-	_ _ (multi lctl pgup) (multi lctl pgdn) (multi lalt tab) _ _ down up _ _ (multi lctl l) _  
+	_ (multi lctl w) _ _ _ _ _ _ _ _ _ _ _ _ 
+	_ _ (multi lctl pgup) (multi lctl pgdn) (multi lalt tab) _ _ down up _ f11 (multi lctl l) _  
 	_ _ _ _ _ _ _ (multi lctl t) _ _ _ _ _  
   
 	_ _ _ _ _ _ _ 

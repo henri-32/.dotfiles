@@ -221,9 +221,16 @@ vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "FileType" }, {
 
 --================= TERMINAL ======================
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+vim.keymap.set("n", "<leader>t", function()
+vim.cmd("term")
+end)
 
 --================= QUICKFIX=======================
 vim.keymap.set("n", "]q", "<cmd>cnext<CR>")
 vim.keymap.set("n", "[q", "<cmd>cprev<CR>")
 vim.keymap.set("n", "<leader>qo", "<cmd>copen<CR>")
 vim.keymap.set("n", "<leader>qc", "<cmd>cclose<CR>") 
+
+--================= NVIM OPERATIONS =======================
+vim.keymap.set("n", "<leader>o", "<C-o>", { desc = "Jump back in jumplist" })
+vim.keymap.set("n", "<leader>i", "<C-i>", { desc = "Jump forward in jumplist" })
