@@ -22,6 +22,13 @@ require("catppuccin").setup({
 
 vim.cmd.colorscheme("catppuccin")
 
+-- ========= COLORCOLUMN =========
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "python",
+    callback = function()
+        vim.opt_local.colorcolumn = "79"
+    end,
+})
 
 -- ========= CMP =========
 local cmp = require("cmp")
@@ -104,8 +111,22 @@ vim.keymap.set("n", "<leader>cc", function()
     autocomplete_enabled = not autocomplete_enabled
 end)
 
+-- ========= LSP BASE CONFIG =========
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.general = {
+    positionEncodings = { "utf-8" },
+}
+
+local base_config = {
+    capabilities = capabilities,
+    flags = {
+        debounce_text_changes = 400,
+    },
+}
+
 -- ========= LSP =========
-vim.lsp.config("clangd", {
+vim.lsp.config("clangd", vim.tbl_deep_extend("force", base_config, {
     cmd = {
         "clangd",
 -- Ob nur im Build gesucht wird oder überall
@@ -117,22 +138,28 @@ vim.lsp.config("clangd", {
         "--completion-style=bundled",
         "--header-insertion=never",
     },
-    flags = {
-        debounce_text_changes = 400,
-    },
-
-})
+}))
 
 vim.lsp.enable("clangd")
 
 -- ---------- PYTHON LSP ----------
-vim.lsp.config("pyright", {
+vim.lsp.config("pyright", vim.tbl_deep_extend("force", base_config, {
+	on_attach = function(client)
+		client.server_capabilities.documentFormattingProvider = false
+	end,
+}))
+
+vim.lsp.enable("pyright")
+
+
+-- ---------- RUFF LSP ----------
+vim.lsp.config("ruff", vim.tbl_deep_extend("force", base_config, {
+    cmd = { "ruff", "server" },
     flags = {
         debounce_text_changes = 400,
     },
-})
-
-vim.lsp.enable("pyright")
+}))
+vim.lsp.enable("ruff")
 
 -- ========= DIAGNOSTICS =========
 vim.diagnostic.config({
@@ -151,9 +178,18 @@ vim.keymap.set("n", "gr", vim.lsp.buf.references)
 vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 vim.keymap.set("n", "<leader>cf", function()
-    vim.lsp.buf.format({ async = false })
+    vim.lsp.buf.format({
+        async = false,
+        filter = function(client)
+            if vim.bo.filetype == "python" then
+                return client.name == "ruff"
+            elseif vim.bo.filetype == "cpp" then
+                return client.name == "clangd"
+            end
+            return true
+        end,
+    })
 end)
-
 vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist)
 
