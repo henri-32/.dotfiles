@@ -2,7 +2,6 @@
   process-unmapped-keys yes
 )
 
-
 (defsrc
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]
@@ -12,18 +11,17 @@
 )
 
 (defalias
-	capsmod (tap-hold-release 140 140 esc (layer-while-held keysR))
-	raltmod (layer-while-held keysL)
-	spacemod (tap-hold-release 200 200 spc (layer-while-held nav))
-	oldralt (layer-while-held at)
+	fmod (tap-hold 200 200 f (layer-while-held keysR))
+	jmod (tap-hold 200 200 j (layer-while-held keysL)) 
+	spacemod (tap-hold-release 200 200 spc (layer-while-held nav)) oldralt (layer-while-held at)
 )
 
 (deflayer base 
 	_ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 	_ _ _ _ _ _ _ _ _ _ _ _ _ 
-	@capsmod _ _ _ _ _ _ _ _ _ _ _ _ _  
+	esc _ _ _ @fmod _ _ @jmod _ _ _ _ _ _  
 	_ @oldralt _ _ _ _ _ _ _ _ _ _ _ 
-	_ _ _ @spacemod @raltmod _ _ 
+	_ _ _ @spacemod _ _ _ 
 ) 
 	
 (deflayer keysR 
@@ -38,7 +36,7 @@
 	_ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 	_ _ _ _ _ _ _ _ _ _ _ _ _  
 	_ (multi ralt q) (multi lsft 4) (multi lsft 5) (multi lsft 6) \ (multi ralt ]) _ _ _ _ _ _ _ 
-	_ _ _ _ _ _ _ _ _ _ _ _ _ 
+	_ _ _ _ (multi ralt -) (multi lsft 7) _ _ _ _ _ _ _ 
 	_ _ _ _ _ _ _ 
 )
 
