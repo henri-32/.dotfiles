@@ -30,6 +30,16 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "python",
+    callback = function()
+        vim.opt_local.tabstop = 4
+        vim.opt_local.shiftwidth = 4
+        vim.opt_local.softtabstop = 4
+        vim.opt_local.expandtab = true
+    end,
+})
+
 -- ========= CMP =========
 local cmp = require("cmp")
 local cmp_types = require("cmp.types")
