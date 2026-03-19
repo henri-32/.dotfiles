@@ -14,15 +14,17 @@
 	fmod (tap-hold 200 200 f (layer-while-held keysR))
 	jmod (tap-hold 200 200 j (layer-while-held keysL)) 
 	spacemod (tap-hold-release 200 200 spc (layer-while-held nav)) oldralt (layer-while-held at)
-	numlmod (tap-hold 200 200 ; (layer-while-held numL))
-	numrmod (tap-hold 200 200 a (layer-while-held numR))
+	numlmod (tap-hold 200 200 l (layer-while-held numL))
+	numrmod (tap-hold 200 200 s (layer-while-held numR))
 	fourspc (macro spc spc spc spc)
+	lsftmod (tap-hold 200 200 a (layer-while-held sft))
+	rsftmod (tap-hold 200 200 ; (layer-while-held sft))
 )
 
 (deflayer base 
 	_ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 	_ _ _ _ _ _ _ _ _ _ _ _ _ 
-	esc @numrmod _ _ @fmod _ _ @jmod _ _ @numlmod _ _ _  
+	esc @lsftmod @numrmod _ @fmod _ _ @jmod _ @numlmod @rsftmod _ _ _  
 	_ @oldralt _ _ _ _ _ _ _ _ _ _ _ 
 	_ _ _ @spacemod _ _ _ 
 ) 
@@ -45,7 +47,7 @@
 
 (deflayer numR
 	_ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-	_ _ _ _ _ _ _ _ _ bspc _ _ _ 
+	_ _ _ _ _ _ _ _ bspc ret del _ _ 
 	_ _ _ _ _ _ 6 7 8 9 0 ret _ _  
 	_ _ _ _ _ _ _ _ _ _ _ _ _ 
 	_ _ _ _ _ _ _ 
@@ -64,8 +66,16 @@
 	_ _ _ _ _ _ _ _ _ _ _ _ _ _  
 	_ _ _ _ _ _ _ _ _ _ _ _ _ 
 	_ _ _ _ _ _ _ 
-
 )
+
+(deflayer sft
+  _   _   _    _    _    _    _    _    _    _    _    _    _    _
+  _  (multi lsft q)    (multi lsft w)    (multi lsft e)    (multi lsft r)    (multi lsft t)    (multi lsft y)    (multi lsft u)    (multi lsft i)    (multi lsft o)    (multi lsft p)    _    _
+  _  (multi lsft a)    (multi lsft s)    (multi lsft d)    (multi lsft f)    (multi lsft g)    (multi lsft h)    (multi lsft j)    (multi lsft k)    (multi lsft l)    (multi lsft ;)    (multi lsft ')    _    _
+  _ _ (multi lsft z)    (multi lsft x)    (multi lsft c)    (multi lsft v)    (multi lsft b)    (multi lsft n)    (multi lsft m)    (multi lsft ,)    (multi lsft .)    (multi lsft /)    _
+  _ _ _           _            _ _ _
+)
+
 (deflayer nav 
 	_ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 	_ (multi lctl w) _ _ _ _ _ _ _ _ _ _ _  
