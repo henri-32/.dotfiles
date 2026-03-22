@@ -73,7 +73,7 @@
 	_ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 	_ (multi lctl w) _ _ _ _ _ _ bspc ret del _ _  
 	_ _ (multi lctl pgup) (multi lctl pgdn) (multi lalt tab) _ left down up right f11 (multi lctl l) _ _ 
-	_ _ _ _ _ _ _ (multi lctl t) _ _ _ _ _  
+	_ _ _ _ _ _ _ (multi lctl t) (multi lctl lalt left) (multi lctl lalt right) (multi lctl lsft lalt left) (multi lctl lsft lalt right) _  
   
 	_ _ _ _ _ _ _ 
 )
