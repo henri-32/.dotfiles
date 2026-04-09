@@ -220,16 +220,18 @@ vim.keymap.set("n", "<leader>fv", function()
 vim.cmd("vsplit")
 require("telescope.builtin").find_files()
 end)
-vim.keymap.set("n", "<leader>fw", function()
-require("telescope.builtin").grep_string()
-end)
 vim.keymap.set("n", "<leader>fd", function()
 require("telescope.builtin").lsp_document_symbols()
 end)
 vim.keymap.set("n", "<leader>fl", function()
 require("telescope.builtin").lsp_workspace_symbols()
 end)
-
+vim.keymap.set('n', '<leader>fw', function()
+  local word = vim.fn.expand("<cword>")
+  require('telescope.builtin').live_grep({
+    default_text = word
+  })
+end)
 
 -- ========= WINDOWS =========
 vim.keymap.set("n", "<leader>wh", "<C-w>h")
