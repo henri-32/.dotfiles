@@ -3,7 +3,6 @@
 vim.o.paste = true
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.expandtab = true
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
 vim.o.clipboard = "unnamedplus"
@@ -28,6 +27,15 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.opt_local.colorcolumn = "79"
     end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown", 
+    callback = function()
+        vim.opt_local.colorcolumn = "75"
+        vim.opt_local.wrap = true
+        vim.opt_local.linebreak = true 
+    end, 
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -282,3 +290,6 @@ vim.keymap.set("n", "<leader>qc", "<cmd>cclose<CR>")
 --================= NVIM OPERATIONS =======================
 vim.keymap.set("n", "<leader>o", "<C-o>", { desc = "Jump back in jumplist" })
 vim.keymap.set("n", "<leader>i", "<C-i>", { desc = "Jump forward in jumplist" })
+vim.keymap.set("n", "j", "gj", { noremap = true, silent = true })
+vim.keymap.set("n", "k", "gk", { noremap = true, silent = true })
+
