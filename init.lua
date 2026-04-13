@@ -147,6 +147,8 @@ local base_config = {
 vim.lsp.config("clangd", vim.tbl_deep_extend("force", base_config, {
     cmd = {
         "clangd",
+		"--query-driver=/usr/bin/avr-g++",
+		"--query-driver=/usr/bin/avr-gcc",
 -- Ob nur im Build gesucht wird oder überall
 -- Kostet vllt etwas viel performance auf T520
         "--background-index=false",
@@ -211,8 +213,8 @@ end)
 vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist)
 
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<leader>dd", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "<leader>DD", vim.diagnostic.goto_next)
 
 -- ========= TELESCOPE =========
 local telescope = require("telescope.builtin")
@@ -282,10 +284,10 @@ vim.keymap.set("n", "<leader>t", function()
 end)
 
 --================= QUICKFIX=======================
-vim.keymap.set("n", "]q", "<cmd>cnext<CR>")
-vim.keymap.set("n", "[q", "<cmd>cprev<CR>")
+vim.keymap.set("n", "<leader>n", "<cmd>cnext<CR>")
+vim.keymap.set("n", "<leader>N", "<cmd>cprev<CR>")
 vim.keymap.set("n", "<leader>qo", "<cmd>copen<CR>")
-vim.keymap.set("n", "<leader>qc", "<cmd>cclose<CR>") 
+vim.keymap.set("n", "<leader>qq", "<cmd>cclose<CR>") 
 
 --================= NVIM OPERATIONS =======================
 vim.keymap.set("n", "<leader>o", "<C-o>", { desc = "Jump back in jumplist" })
