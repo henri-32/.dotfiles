@@ -278,7 +278,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "FileType" }, {
 --================= TERMINAL ======================
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 vim.keymap.set("n", "<leader>t", function()
-vim.cmd("term")
+	vim.cmd("term")
 end)
 
 --================= QUICKFIX=======================
@@ -293,3 +293,11 @@ vim.keymap.set("n", "<leader>i", "<C-i>", { desc = "Jump forward in jumplist" })
 vim.keymap.set("n", "j", "gj", { noremap = true, silent = true })
 vim.keymap.set("n", "k", "gk", { noremap = true, silent = true })
 
+vim.keymap.set("n", "<leader>fcy", function()
+	vim.fn.setreg("+", vim.fn.expand("%:p"))
+	vim.notify("absolute path copied to clipboard")
+end)
+vim.keymap.set("n", "<leader>fy", function()
+	vim.fn.setreg("+", vim.fn.expand("%"))
+	vim.notify("relative path copied to clipboard")
+end)
