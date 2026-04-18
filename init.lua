@@ -329,6 +329,7 @@ vim.keymap.set("n", "<leader>wq", function()
 	vim.cmd("w")
 	vim.cmd("q")
 end)
-vim.keymap.set("n", "<leader>mb", "imake clean<CR>bear -- make ")
+vim.keymap.set("n", "<leader>mb", ":term<CR>imake clean<CR>bear -- make ")
+vim.keymap.set("n", "<leader>m", ":make<CR>")
 vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>")
 
