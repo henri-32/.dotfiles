@@ -149,6 +149,7 @@ vim.lsp.config("clangd", vim.tbl_deep_extend("force", base_config, {
         "clangd",
 		"--query-driver=/usr/bin/avr-g++",
 		"--query-driver=/usr/bin/avr-gcc",
+		"--query-driver=/usr/bin/g++",
 -- Ob nur im Build gesucht wird oder überall
 -- Kostet vllt etwas viel performance auf T520
         "--background-index=false",
@@ -294,6 +295,9 @@ vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "FileType" }, {
 --================= TERMINAL ======================
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 vim.keymap.set("n", "<leader>t", function()
+	vim.cmd("term")
+end)
+vim.keymap.set("n", "<leader>tt", function()
 	vim.cmd("split")
 	vim.cmd("term")
 end)
