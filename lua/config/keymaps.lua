@@ -78,6 +78,7 @@ function M.keymaps()
     vim.keymap.set("n", "<leader>ws", "<C-w>s")
     vim.keymap.set("n", "<leader>q", "<C-w>c")
     vim.keymap.set("n", "<leader>ww", "<C-w>o")
+	vim.keymap.set("n", "<leader>m", "<cmd>MaximizerToggle<CR>")
 
     -- ========= TERMINAL =========
     vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
