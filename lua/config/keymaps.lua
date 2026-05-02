@@ -2,6 +2,11 @@ local M = {}
 
 function M.keymaps()
     local telescope = require("telescope.builtin")
+	
+	-- ========= REGISTER DEFAULTS ==============
+	-- Öffnet mir die { so dass ich direkt schreiben kann (\x1b) ist Esc
+	vim.fn.setreg("u", "a{\n\n}\x1bki  ")
+	vim.fn.setreg("m", ":wall\n:make test run_test\n")
 
     -- ========= COMPLETION =========
     vim.keymap.set("n", "<leader>cc", function()
