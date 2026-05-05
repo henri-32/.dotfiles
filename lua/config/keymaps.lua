@@ -6,7 +6,7 @@ function M.keymaps()
 	-- ========= REGISTER DEFAULTS ==============
 	-- Öffnet mir die { so dass ich direkt schreiben kann (\x1b) ist Esc
 	vim.fn.setreg("u", "a{\n\n}\x1bki  ")
-	vim.fn.setreg("m", ":wall\n:make test run_test\n")
+	vim.fn.setreg("m", ":wall\n:make \n:make test run_test\n")
 
     -- ========= COMPLETION =========
     vim.keymap.set("n", "<leader>cc", function()
@@ -134,6 +134,9 @@ function M.keymaps()
     vim.keymap.set("n", "<leader>w", function()
         vim.cmd("w")
     end)
+	vim.keymap.set("n", "<leader>wa", function()
+		vim.cmd("wall")
+	end)
     vim.keymap.set("n", "<leader>wq", function()
         vim.cmd("w")
         vim.cmd("q")
