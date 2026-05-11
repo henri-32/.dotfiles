@@ -1,7 +1,8 @@
 local M = {}
 
-function M.keymaps()
+function M.setup()
     local telescope = require("telescope.builtin")
+    local state = require("config.state")
 	
 	-- ========= REGISTER DEFAULTS ==============
 	-- Öffnet mir die { so dass ich direkt schreiben kann (\x1b) ist Esc
@@ -10,7 +11,7 @@ function M.keymaps()
 
     -- ========= COMPLETION =========
     vim.keymap.set("n", "<leader>cc", function()
-        autocomplete_enabled = not autocomplete_enabled
+        state.autocomplete_enabled = not state.autocomplete_enabled
     end)
 
     -- ========= LSP: NAVIGATION =========
