@@ -21,6 +21,45 @@ vim.o.foldmarker = "{{{,}}}"
 vim.o.foldcolumn = "1"
 vim.cmd("filetype indent off")
 
+
+-- ========= telescope.actions======== 
+local actions = require("telescope.actions")
+require("telescope").setup({
+	defaults = {
+		mappings = {
+			i = {         
+				["<M-l>"] = actions.send_to_loclist
+					+ actions.open_loclist,
+
+				["<C-l>"] = actions.send_selected_to_loclist
+					+ actions.open_loclist, 
+	
+				["<C-l>a"] = actions.add_selected_to_loclist
+					+ actions.open_loclist,
+
+
+			},
+		},
+	},
+})
+-- ========= quicker.nvim ============
+require("quicker").setup({
+	keys = {
+		{
+		  ">", 
+		  function()
+			require("quicker").expand({before = 2, after = 2, add_to_existing = true})
+		  end
+		},
+		{
+		  "<", 
+		  function()
+			require("quicker").collapse()
+		  end 
+		}
+	},
+})
+
 -- ========= UI: THEME =========
 require("catppuccin").setup({
     flavour = "macchiato",
@@ -146,9 +185,7 @@ vim.lsp.config("clangd", vim.tbl_deep_extend("force", base_config, {
         "--query-driver=/usr/bin/avr-g++",
         "--query-driver=/usr/bin/avr-gcc",
         "--query-driver=/usr/bin/g++",
-        -- Ob nur im Build gesucht wird oder überall
-        -- Kostet vllt etwas viel performance auf T520
-        "--background-index=false",
+        "--background-index=true",
         "--clang-tidy=false",
         "--all-scopes-completion=false",
         "--limit-results=10",

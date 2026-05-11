@@ -81,7 +81,6 @@ function M.keymaps()
     vim.keymap.set("n", "<leader>ll", "<C-w>l")
     vim.keymap.set("n", "<leader>wv", "<C-w>v")
     vim.keymap.set("n", "<leader>ws", "<C-w>s")
-    vim.keymap.set("n", "<leader>q", "<C-w>c")
     vim.keymap.set("n", "<leader>ww", "<C-w>o")
 	vim.keymap.set("n", "<leader>m", "<cmd>MaximizerToggle<CR>")
 
@@ -98,14 +97,21 @@ function M.keymaps()
     -- ========= QUICKFIX =========
     vim.keymap.set("n", "<leader>n", "<cmd>cnext<CR>")
     vim.keymap.set("n", "<leader>N", "<cmd>cprev<CR>")
-    vim.keymap.set("n", "<leader>qo", "<cmd>copen<CR>")
-    vim.keymap.set("n", "<leader>qc", "<cmd>cclose<CR>")
+    vim.keymap.set("n", "<leader>q", function()
+		require("quicker").toggle()
+	end)
+
+    -- hiermit kann ich gtest ergebnisse in eine datei schreiben und die in die
+	-- quickfixlist laden 
     vim.keymap.set("n", "<leader>qf", function()
         vim.cmd("cfile neovim_utils/quickfix_list.txt")
         vim.cmd("copen")
     end)
 
-
+	-- ========= LOCLIST =========
+	vim.keymap.set("n", "<leader>l", function()
+		require("quicker").toggle({loclist = true})
+	end)
     -- ========= EDITOR NAVIGATION =========
     vim.keymap.set("n", "<leader>o", "<C-o>", { desc = "Jump back in jumplist" })
     vim.keymap.set("n", "<leader>i", "<C-i>", { desc = "Jump forward in jumplist" })
