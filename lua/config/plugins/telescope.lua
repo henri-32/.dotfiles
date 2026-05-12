@@ -7,9 +7,10 @@ function M.setup()
         defaults = {
             mappings = {
                 i = {
-                    ["<M-l>"] = actions.send_to_loclist + actions.open_loclist,
-                    ["<C-l>"] = actions.send_selected_to_loclist + actions.open_loclist,
-                    ["<C-l>a"] = actions.add_selected_to_loclist + actions.open_loclist,
+                    ["<C-l>"] = actions.send_to_loclist + actions.open_loclist,
+					["<C-l>a"] = actions.add_to_loclist + actions.open_loclist,
+                    ["<M-l>"] = actions.send_selected_to_loclist + actions.open_loclist,
+                    ["<M-l>a"] = actions.add_selected_to_loclist + actions.open_loclist,
                 },
             },
         },

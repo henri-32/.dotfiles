@@ -1,0 +1,3 @@
+[submodule "scripts/commit_messages/minimal-helperscript-for-commit-messages-with-openai-api"]
+	path = scripts/commit_messages/minimal-helperscript-for-commit-messages-with-openai-api
+	url = git@github.com:henri-32/minimal-helperscript-for-commit-messages-with-openai-api.git

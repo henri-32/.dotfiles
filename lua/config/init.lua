@@ -11,6 +11,7 @@ function M.setup()
     require("config.lsp").setup()
     require("config.autocmds").setup()
     require("config.keymaps").setup()
+	require("config.usercmds").setup()
 end
 
 return M

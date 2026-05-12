@@ -113,6 +113,9 @@ function M.setup()
 	vim.keymap.set("n", "<leader>l", function()
 		require("quicker").toggle({loclist = true})
 	end)
+	vim.keymap.set("n", "<C-j>", "<cmd>lnext<CR>")
+	vim.keymap.set("n", "<C-k>", "<cmd>lprev<CR>")
+
     -- ========= EDITOR NAVIGATION =========
     vim.keymap.set("n", "<leader>o", "<C-o>", { desc = "Jump back in jumplist" })
     vim.keymap.set("n", "<leader>i", "<C-i>", { desc = "Jump forward in jumplist" })
