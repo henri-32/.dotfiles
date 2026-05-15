@@ -20,9 +20,7 @@ function M.setup()
 			)
 			if buftype == "terminal" then 
 				local job_id  = vim.b.terminal_job_id
-				vim.fn.chansend(job_id, ("scripts/commit_messages/" .. 
-					"minimal-helperscript-for-commit-messages-" ..
-					"with-openai-api/./commit_messages.py"))
+				vim.fn.chansend(job_id, ("./commitmessage"))
 				vim.fn.chansend(job_id, "\n")
 				vim.cmd("startinsert")
 			else 
@@ -32,9 +30,7 @@ function M.setup()
 				vim.api.nvim_win_set_buf(win, buf)
 				vim.fn.termopen("bash")
 				local job_id = vim.b.terminal_job_id
-				vim.fn.chansend(job_id, ("scripts/commit_messages/" .. 
-					"minimal-helperscript-for-commit-messages-" ..
-					"with-openai-api/./commit_messages.py"))
+				vim.fn.chansend(job_id, ("./commitmessage"))
 				vim.fn.chansend(job_id, "\n")
 				vim.cmd("startinsert")
 			end
