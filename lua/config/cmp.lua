@@ -32,11 +32,16 @@ function M.setup()
 
     local function should_trigger_completion()
         local col = vim.fn.col(".") - 1
+        local line = vim.fn.getline(".")
+
+        if col == 0 and line:match("^%s*$") then
+            return false
+        end
+
         if col <= 0 then
             return true
         end
 
-        local line = vim.fn.getline(".")
         local char_before = line:sub(col, col)
         return not char_before:match("%s")
     end

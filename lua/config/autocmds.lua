@@ -27,23 +27,12 @@ function M.setup()
         end,
     })
 	
-	vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "FileType" }, {
-		callback = function()
-			local ft = vim.bo.filetype
-			local bt = vim.bo.buftype
-
-			if ft == "TelescopePrompt"
-				or ft == "TelescopeResults"
-				or bt == "prompt"
-				or bt == "nofile"
-				or bt == "help"
-			then
-				vim.opt_local.paste = false
-			else
-				vim.opt_local.paste = true
-			end
-		end,
-	})
+    vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "FileType" }, {
+        callback = function()
+            -- Keep paste mode disabled so Insert-mode completion and mappings work.
+            vim.opt_local.paste = false
+        end,
+    })
 end
 
 return M

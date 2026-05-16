@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup()
-    vim.o.paste = true
+    vim.o.paste = false
     vim.o.number = true
     vim.o.relativenumber = true
     vim.o.timeoutlen = 300
