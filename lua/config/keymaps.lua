@@ -76,10 +76,10 @@ function M.setup()
     end)
 
     -- ========= WINDOWS =========
-    vim.keymap.set("n", "<leader>hh", "<C-w>h")
-    vim.keymap.set("n", "<leader>jj", "<C-w>j")
-    vim.keymap.set("n", "<leader>kk", "<C-w>k")
-    vim.keymap.set("n", "<leader>ll", "<C-w>l")
+    vim.keymap.set("n", "<leader>h", "<C-w>h")
+    vim.keymap.set("n", "<leader>j", "<C-w>j")
+    vim.keymap.set("n", "<leader>k", "<C-w>k")
+    vim.keymap.set("n", "<leader>l", "<C-w>l")
     vim.keymap.set("n", "<leader>wv", "<C-w>v")
     vim.keymap.set("n", "<leader>ws", "<C-w>s")
     vim.keymap.set("n", "<leader>ww", "<C-w>o")
@@ -110,7 +110,7 @@ function M.setup()
     end)
 
 	-- ========= LOCLIST =========
-	vim.keymap.set("n", "<leader>l", function()
+	vim.keymap.set("n", "<leader>ll", function()
 		require("quicker").toggle({loclist = true})
 	end)
 	vim.keymap.set("n", "<C-j>", "<cmd>lnext<CR>")
