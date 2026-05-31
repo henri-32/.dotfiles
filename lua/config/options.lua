@@ -5,8 +5,8 @@ function M.setup()
     vim.o.number = true
     vim.o.relativenumber = true
     vim.o.timeoutlen = 300
-	vim.o.ttimeout = true 
-	vim.o.ttimeoutlen = 10 
+    vim.o.ttimeout = true
+    vim.o.ttimeoutlen = 0
     vim.o.shiftwidth = 4
     vim.o.tabstop = 4
     vim.o.clipboard = "unnamedplus"

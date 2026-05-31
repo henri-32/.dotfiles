@@ -24,9 +24,7 @@ function M.setup()
                     fallback()
                 end
             end, { "i", "s" }),
-            ["<M-j>"] = cmp.mapping.select_next_item(),
-            ["<M-k>"] = cmp.mapping.select_prev_item(),
-            ["<Esc>"] = cmp.mapping.abort(),
+            ["C-c"] = cmp.mapping.abort(),
         },
     })
 

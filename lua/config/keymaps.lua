@@ -86,7 +86,8 @@ function M.setup()
 	vim.keymap.set("n", "<leader>m", "<cmd>MaximizerToggle<CR>")
 
     -- ========= TERMINAL =========
-    vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+    vim.keymap.set("i", "<Esc>", "<Esc>", { nowait = true, silent = true })
+    vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { nowait = true, silent = true })
     vim.keymap.set("n", "<leader>t", function()
         vim.cmd("term")
     end)
