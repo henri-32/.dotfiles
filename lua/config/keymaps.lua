@@ -83,6 +83,7 @@ function M.setup()
     vim.keymap.set("n", "<leader>wv", "<C-w>v")
     vim.keymap.set("n", "<leader>ws", "<C-w>s")
     vim.keymap.set("n", "<leader>ww", "<C-w>o")
+	vim.keymap.set("n", "<leader>x", "<C-w>c")
 	vim.keymap.set("n", "<leader>m", "<cmd>MaximizerToggle<CR>")
 
     -- ========= TERMINAL =========
