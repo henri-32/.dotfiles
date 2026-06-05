@@ -131,6 +131,11 @@ function M.setup()
 		vim.cmd("split") 
 		vim.cmd("e .")
 	end)
+	
+	vim.keymap.set("n", "<leader>r", function()
+		vim.cmd("edit") 
+		vim.notify("File refreshed")
+	end)
 
     -- ========= FILE PATH COPYING =========
     vim.keymap.set("n", "<leader>fcy", function()
