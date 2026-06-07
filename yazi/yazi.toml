@@ -1,0 +1,84 @@
+[mgr]
+show_hidden = true
+sort_by = "natural"
+sort_dir_first = true
+linemode = "size"
+
+[opener]
+edit = [
+	{ run = "nvim %s", block = true, for = "unix", desc = "Edit with Neovim" },
+]
+
+pdf = [
+	{ run = "sh -c 'if command -v zathura >/dev/null 2>&1; then exec zathura \"$1\"; elif command -v evince >/dev/null 2>&1; then exec evince \"$1\"; else exec xdg-open \"$1\"; fi' -- %s1", orphan = true, for = "unix", desc = "Open PDF" },
+]
+
+image = [
+	{ run = "sh -c 'if command -v imv >/dev/null 2>&1; then exec imv \"$@\"; else exec xdg-open \"$1\"; fi' -- %s", orphan = true, for = "unix", desc = "Open image" },
+]
+
+media = [
+	{ run = "sh -c 'if command -v mpv >/dev/null 2>&1; then exec mpv \"$@\"; else exec xdg-open \"$1\"; fi' -- %s", orphan = true, for = "unix", desc = "Play media" },
+]
+
+office = [
+	{ run = "libreoffice %s", orphan = true, for = "unix", desc = "Open with LibreOffice" },
+]
+
+open = [
+	{ run = "xdg-open %s1", orphan = true, for = "unix", desc = "Open" },
+]
+
+[open]
+prepend_rules = [
+	{ url = "*/", use = "edit" },
+
+	{ mime = "text/*", use = "edit" },
+	{ mime = "inode/empty", use = "edit" },
+	{ mime = "application/json", use = "edit" },
+	{ mime = "application/x-ndjson", use = "edit" },
+	{ mime = "application/xml", use = "edit" },
+	{ mime = "application/x-yaml", use = "edit" },
+	{ url = "*.toml", use = "edit" },
+	{ url = "*.yaml", use = "edit" },
+	{ url = "*.yml", use = "edit" },
+	{ url = "*.md", use = "edit" },
+	{ url = "*.rst", use = "edit" },
+	{ url = "*.log", use = "edit" },
+	{ url = "*.conf", use = "edit" },
+	{ url = "*.ini", use = "edit" },
+	{ url = "*.env", use = "edit" },
+	{ url = "*.sh", use = "edit" },
+	{ url = "*.bash", use = "edit" },
+	{ url = "*.zsh", use = "edit" },
+	{ url = "*.fish", use = "edit" },
+	{ url = "*.lua", use = "edit" },
+	{ url = "*.py", use = "edit" },
+	{ url = "*.js", use = "edit" },
+	{ url = "*.ts", use = "edit" },
+	{ url = "*.jsx", use = "edit" },
+	{ url = "*.tsx", use = "edit" },
+	{ url = "*.rs", use = "edit" },
+	{ url = "*.go", use = "edit" },
+	{ url = "*.c", use = "edit" },
+	{ url = "*.h", use = "edit" },
+	{ url = "*.cpp", use = "edit" },
+	{ url = "*.hpp", use = "edit" },
+	{ url = "*.java", use = "edit" },
+	{ url = "*.kt", use = "edit" },
+	{ url = "*.php", use = "edit" },
+	{ url = "*.rb", use = "edit" },
+	{ url = "*.sql", use = "edit" },
+
+	{ mime = "application/pdf", use = "pdf" },
+
+	{ mime = "image/*", use = "image" },
+	{ mime = "video/*", use = "media" },
+	{ mime = "audio/*", use = "media" },
+
+	{ mime = "application/vnd.oasis.opendocument.*", use = "office" },
+	{ mime = "application/vnd.openxmlformats-officedocument.*", use = "office" },
+	{ mime = "application/msword", use = "office" },
+	{ mime = "application/vnd.ms-excel", use = "office" },
+	{ mime = "application/vnd.ms-powerpoint", use = "office" },
+]
