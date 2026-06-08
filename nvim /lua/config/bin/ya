@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if command -v yazi.ya >/dev/null 2>&1; then
+	exec yazi.ya "$@"
+fi
+
+exec /snap/bin/yazi.ya "$@"

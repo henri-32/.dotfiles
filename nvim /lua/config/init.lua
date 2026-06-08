@@ -12,6 +12,7 @@ function M.setup()
     require("config.autocmds").setup()
     require("config.keymaps").setup()
 	require("config.usercmds").setup()
+	require("config.plugins.yazi").setup()
 end
 
 return M
