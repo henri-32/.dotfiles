@@ -1,0 +1,6 @@
+[mgr]
+prepend_keymap = [
+	{ on = "s", run = "filter --smart", desc = "Filter files" },
+	{ on = [ "f", "f" ], run = "search --via=fd", desc = "Search files by name" },
+	{ on = [ "f", "g" ], run = "search --via=rg", desc = "Search file contents" },
+]
