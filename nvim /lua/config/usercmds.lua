@@ -1,6 +1,42 @@
 local M = {} 
 
 function M.setup()
+	if vim.fn.exists(":LspInfo") == 0 then
+		vim.api.nvim_create_user_command("LspInfo", "checkhealth vim.lsp", {})
+	end
+
+	if vim.fn.exists(":LspRestart") == 0 then
+		vim.api.nvim_create_user_command(
+			"LspRestart",
+			function(info)
+				local names = info.fargs
+
+				if #names == 0 then
+					names = vim
+						.iter(vim.lsp.get_clients())
+						:map(function(client)
+							return client.name
+						end)
+						:totable()
+				end
+
+				for _, name in ipairs(names) do
+					vim.lsp.enable(name, false)
+					for _, client in ipairs(vim.lsp.get_clients({ name = name })) do
+						client:stop(info.bang)
+					end
+				end
+
+				vim.defer_fn(function()
+					for _, name in ipairs(names) do
+						vim.lsp.enable(name)
+					end
+				end, 500)
+			end,
+			{ nargs = "*", bang = true }
+		)
+	end
+
 	vim.api.nvim_create_user_command(
 		"DebugUnitTests", 
 		function()

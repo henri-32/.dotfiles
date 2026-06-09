@@ -35,7 +35,7 @@ install_packages() {
 		man-db man-pages bash-completion
 		htop jq ripgrep fd fzf bat eza
 		unzip zip p7zip zstd dos2unix redshift
-		fwupd usbutils
+		fwupd usbutils tlp zoxide
 	)
 
 	local terminal_workflow=(
@@ -45,7 +45,8 @@ install_packages() {
 	)
 
 	local hyprland_stack=(
-		hyprland hyprpaper xdg-desktop-portal-hyprland
+		hyprland hyprpaper hyprpolkitagent 
+		xdg-desktop-portal-hyprland
 		foot waybar mako wofi
 		grim slurp imv mpv
 		brightnessctl playerctl pavucontrol
@@ -89,6 +90,7 @@ install_packages() {
 		git@github.com:nvim-lua/plenary.nvim.git
 		git@github.com:stevearc/quicker.nvim.git
 		git@github.com:hrsh7th/nvim-cmp.git
+		git@github.com:neovim/nvim-lspconfig.git
 		git@github.com:mikavilpas/yazi.nvim.git
 	)
 
