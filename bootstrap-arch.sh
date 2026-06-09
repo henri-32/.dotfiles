@@ -206,7 +206,7 @@ export PATH="$HOME/.local/bin:$HOME/.npm-global/bin:$PATH"
 alias tmux_coding="$HOME/projects/scripts/setup_scripts/tmux_coding.sh"
 alias nvim-server="nvim --listen /tmp/nvim-main.sock"
 alias lucid='chromium --ozone-platform=wayland --app=https://lucid.app'
-alias projectstat='cd "$HOME" && ./Softwareprojekte/scripts_git/project_status/status.sh'
+alias projectstat='cd "$HOME" && ./projects/scripts/project_status/status.sh'
 EOF
 	fi
 
