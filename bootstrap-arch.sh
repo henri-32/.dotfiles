@@ -92,6 +92,9 @@ install_packages() {
 		git@github.com:hrsh7th/nvim-cmp.git
 		git@github.com:neovim/nvim-lspconfig.git
 		git@github.com:mikavilpas/yazi.nvim.git
+		git@github.com:mfussenegger/nvim-dap.git
+		git@github.com:nvim-neotest/nvim-nio.git
+		git@github.com:rcarriga/nvim-dap-ui.git
 	)
 
 	"${PACMAN[@]}" "${base[@]}"

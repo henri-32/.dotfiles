@@ -1,0 +1,279 @@
+;; ergodox-port.kbd
+;;
+;; Portierung der QMK-Ergodox-Belegung auf eine normale deutsche ISO-Tastatur.
+;; Das Betriebssystem muss weiterhin auf deutsches Tastaturlayout eingestellt sein.
+
+(defcfg
+  process-unmapped-keys yes
+  concurrent-tap-hold yes
+)
+
+;; Die Namen entsprechen den physischen Tastencodes.
+;; Auf deutschem QWERTZ erzeugt beispielsweise:
+;;
+;;   y     -> z
+;;   z     -> y
+;;   [     -> ü
+;;   ;     -> ö
+;;   '     -> ä
+;;   -     -> ß
+;;   /     -> -
+;;   102d  -> <
+;;
+(defsrc
+  esc
+  grv 1 2 3 4 5 6 7 8 9 0 - = bspc
+  tab q w e r t y u i o p [ ] \
+  caps a s d f g h j k l ; ' ret
+  lsft 102d z x c v b n m , . / rsft
+  lctl lmet lalt spc ralt rmet rctl
+)
+
+(defalias
+  ;; ------------------------------------------------------------
+  ;; Home-Row-Mods und Layer-Taps
+  ;; ------------------------------------------------------------
+
+  ;; QMK: MT(MOD_LALT, KC_A), tapping term 300
+  a-alt (tap-hold-press 300 300 a lalt)
+
+  ;; QMK: MT(MOD_LCTL, KC_S), tapping term 250
+  s-ctl (tap-hold-press 250 250 s lctl)
+
+  ;; QMK: LT(navigation, KC_D), tapping term 250
+  d-nav (tap-hold-press 250 250 d (layer-while-held navigation))
+
+  ;; QMK: LT(custom_signs, KC_F), tapping term 150
+  f-sym (tap-hold-press 150 150 f (layer-while-held symbols))
+
+  ;; QMK: LT(custom_signs, KC_J), tapping term 150
+  j-sym (tap-hold-press 150 150 j (layer-while-held symbols))
+
+  ;; QMK: LT(navigation, KC_K), tapping term 250
+  k-nav (tap-hold-press 250 250 k (layer-while-held navigation))
+
+  ;; QMK: MT(MOD_LCTL, KC_L), tapping term 250
+  l-ctl (tap-hold-press 250 250 l lctl)
+
+  ;; Physische Taste ";" erzeugt unter deutschem Layout Ö.
+  ;; QMK: MT(MOD_LALT, DE_ODIA), tapping term 300
+  oe-alt (tap-hold-press 300 300 ; lalt)
+
+  ;; QMK: LT(numbers, KC_V)
+  v-num (tap-hold-press 200 200 v (layer-while-held numbers))
+
+  ;; QMK: MT(MOD_LCTL, KC_Z)
+  ;; Achtung: Auf deutschem QWERTZ ist der physische QMK-KC_Z-Platz
+  ;; die unten links liegende Y-Taste.
+  y-ctl (tap-hold-press 200 200 z lctl)
+
+  ;; QMK: MT(MOD_LCTL, DE_MINS)
+  ;; Physische "/"-Taste erzeugt unter deutschem Layout "-".
+  minus-ctl (tap-hold-press 200 200 / lctl)
+
+  ;; Ersatz für OSM(MOD_LSFT).
+  ;; Tippen: Shift gilt für die nächste Taste.
+  ;; Halten: verhält sich ebenfalls wie Shift.
+  os-shift (one-shot 5000 lsft)
+
+  ;; QMK Caps Word:
+  ;; Buchstaben werden großgeschrieben.
+  ;; "-" wird durch deutsches Shift+"-" zu "_".
+  ;; Backspace bleibt zulässig.
+  capsword
+    (caps-word-custom-toggle
+      5000
+      (a b c d e f g h i j k l m n o p q r s t u v w x y z /)
+      (0 1 2 3 4 5 6 7 8 9 bspc del left rght up down)
+    )
+
+  ;; ------------------------------------------------------------
+  ;; Deutsche Sonderzeichen
+  ;;
+  ;; Diese Kombinationen setzen ein deutsches XKB-Layout voraus.
+  ;; Kanata sendet die jeweilige physische Taste plus Shift/AltGr.
+  ;; ------------------------------------------------------------
+
+  ;; Shift-Zeichen
+  question S--
+  quote2   S-2
+  dollar   S-4
+  percent  S-5
+  amp      S-6
+  slash    S-7
+  lparen   S-8
+  rparen   S-9
+  equal    S-0
+  rangle   S-102d
+  exclaim  S-1
+  star     S-]
+
+  ;; Unmodifizierte deutsche Tasten
+  hash     \
+  plus     ]
+  langle   102d
+
+  ;; AltGr-Zeichen
+  at       RA-q
+  lbrace   RA-7
+  lbracket RA-8
+  rbracket RA-9
+  rbrace   RA-0
+  backslash RA--
+  tilde    RA-]
+  pipe     RA-102d
+
+  ;; QMK CC_NL:
+  ;; deutsches "\" und danach "n" -> \n
+  newline-literal (macro RA-- n)
+
+  ;; Navigation / Anwendungen
+  prev-tab C-pgup
+  next-tab C-pgdn
+  alt-tab  A-tab
+  close-tab C-w
+  new-tab   C-t
+)
+
+(deflayer base
+  esc
+  grv 1 2 3 4 5 6 7 8 9 0 - = bspc
+
+  tab q w e r t y u i o p [ ] \
+
+  @os-shift
+  @a-alt @s-ctl @d-nav @f-sym g
+  h @j-sym @k-nav @l-ctl @oe-alt '
+  ret
+
+  lsft
+  102d @y-ctl x c @v-num b n m , . @minus-ctl
+  rsft
+
+  lctl lmet lalt spc ralt rmet rctl
+)
+
+(deflayer symbols
+  _
+  _ f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 _
+
+  _
+  @question
+  @hash
+  esc
+  @amp
+  tab
+  _
+  @lbrace
+  @rbrace
+  @quote2
+  @plus
+  @star
+  _
+  _
+
+  @capsword
+  @at
+  @dollar
+  @percent
+  @slash
+  @hash
+  @langle
+  @lparen
+  @rparen
+  @rangle
+  @equal
+  @slash
+  ret
+
+  _
+  _
+  _
+  _
+  @backslash
+  @tilde
+  _
+  @newline-literal
+  @lbracket
+  @rbracket
+  @pipe
+  @exclaim
+  _
+
+  _ _ _ spc _ _ _
+)
+
+(deflayer navigation
+  _
+  _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+  _
+  _ _ _ _ _ _ _ _ _ _ _ _ _
+
+  _
+  _
+  @prev-tab
+  @next-tab
+  @alt-tab
+  _
+  left down up rght
+  f11
+  _
+  ret
+
+  _
+  _
+  @close-tab
+  _
+  _
+  _
+  _
+  _
+  @new-tab
+  prev
+  next
+  _
+  _
+
+  _ _ _ spc _ _ _
+)
+
+(deflayer numbers
+  _
+   _ _ _ _ _ _ _ _ _ _ _ _ _
+
+  _
+  _ _ _ _ _ _
+  _
+  
+  7 8 9 _
+  _
+  _
+  _
+
+  _
+  lalt
+  _
+  _
+  _
+  _
+  _
+  4 5 6
+  _
+  _
+  ret
+
+  _
+  _
+  _
+  _
+  _
+  _
+  _
+  _
+  
+  1 2 3 _
+  _
+
+  _ _ _ 0 _ _ _
+)

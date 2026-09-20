@@ -10,9 +10,11 @@ function M.setup()
     require("config.cmp").setup()
     require("config.lsp").setup()
     require("config.autocmds").setup()
+	require("config.plugins.dap").setup()
     require("config.keymaps").setup()
 	require("config.usercmds").setup()
 	require("config.plugins.yazi").setup()
+	require("config.plugins.harpoon").setup()
 end
 
 return M

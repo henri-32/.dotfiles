@@ -11,20 +11,22 @@ function M.setup()
 
     -- ========= COMPLETION =========
     vim.keymap.set("n", "<leader>cc", function()
-        state.autocomplete_enabled = not state.autocomplete_enabled
+		vim.o.autocomplete = not vim.o.autocomplete
+		print("autocomplete: " .. tostring(vim.o.autocomplete))
     end)
 
     -- ========= LSP: NAVIGATION =========
+	vim.keymap.set("n", "gf", vim.lsp.buf.signature_help)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition)
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
     vim.keymap.set("n", "K", vim.lsp.buf.hover)
     vim.keymap.set("n", "gr", vim.lsp.buf.references)
 
     -- ========= LSP: ACTIONS =========
-    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename)
+    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename)
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
     vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>")
-    vim.keymap.set("n", "<leader>cf", function()
+    vim.keymap.set("n", "<leader>f", function()
         vim.lsp.buf.format({
             async = false,
             filter = function(client)
@@ -43,6 +45,20 @@ function M.setup()
     vim.keymap.set("n", "<leader>do", vim.diagnostic.setloclist)
     vim.keymap.set("n", "<leader>dd", vim.diagnostic.goto_prev)
     vim.keymap.set("n", "<leader>DD", vim.diagnostic.goto_next)
+
+	-- ========= DEBUGGER =========
+	local dap = require("dap")
+	local dapui = require("dapui")
+
+	vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debugger: start/continue" })
+	vim.keymap.set("n", "<leader>uo", dap.step_out, { desc = "Debugger: step out" })
+	vim.keymap.set("n", "<leader>ub", dap.toggle_breakpoint, { desc = "Debugger: toggle breakpoint" })
+	vim.keymap.set("n", "<leader>un", dap.step_over, { desc = "Debugger: step over" })
+	vim.keymap.set("n", "<leader>ui", dap.step_into, { desc = "Debugger: step into" })
+	vim.keymap.set("n", "<leader>uq", dap.terminate, { desc = "Debugger: terminate" })
+	vim.keymap.set("n", "<leader>ud", dapui.toggle, { desc = "Debugger: toggle UI" })
+	vim.keymap.set({ "n", "v" }, "<leader>ue", dapui.eval, { desc = "Debugger: evaluate" })
+	vim.keymap.set("n", "<leader>ur", dap.repl.open, { desc = "Debugger: open REPL" })
 
     -- ========= TELESCOPE: FILES / SEARCH =========
     vim.keymap.set("n", "<leader>ff", telescope.find_files)
@@ -74,6 +90,17 @@ function M.setup()
         vim.cmd("vsplit")
         telescope.live_grep()
     end)
+
+    -- ========= HARPOON =========
+    local harpoon = require("harpoon")
+    vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+	vim.keymap.set("n", "<leader>s", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+	vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end)
+	vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end)
+	vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end)
+	vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)
+
+
 
     -- ========= WINDOWS =========
     vim.keymap.set("n", "<leader>h", "<C-w>h")
@@ -130,12 +157,12 @@ function M.setup()
     end)
 	vim.keymap.set("n", "<leader>e", "<cmd>e .<CR>")
 	vim.keymap.set("n", "<leader>ee", function ()
-		vim.cmd("split") 
+		vim.cmd("split")
 		vim.cmd("e .")
 	end)
 	
-	vim.keymap.set("n", "<leader>r", function()
-		vim.cmd("edit") 
+	vim.keymap.set("n", "<leader>fr", function()
+		vim.cmd("edit")
 		vim.notify("File refreshed")
 	end)
 
