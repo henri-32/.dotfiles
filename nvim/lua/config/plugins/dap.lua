@@ -46,7 +46,7 @@ function M.setup()
 		},
 		{
 			name = "Select executable",
-			type = "codelldb",
+			type = "gdb",
 			request = "launch",
 			program = function()
 				return coroutine.create(function(dap_run_co)

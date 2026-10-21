@@ -77,17 +77,17 @@ function M.setup()
 	end, { expr = true, desc = "Confirm completion or insert tab" })
 
 	-- ========= LSP: NAVIGATION =========
-	vim.keymap.set("n", "gf", vim.lsp.buf.signature_help)
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-	vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
+	vim.keymap.set("n", "<leader>lf", vim.lsp.buf.signature_help)
+	vim.keymap.set("n", "L", vim.lsp.buf.definition)
+	vim.keymap.set("n", "<leader>ld", vim.lsp.buf.declaration)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover)
-	vim.keymap.set("n", "gr", vim.lsp.buf.references)
+	vim.keymap.set("n", "<leader>lR", vim.lsp.buf.references)
 
 	-- ========= LSP: ACTIONS =========
 	vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename)
-	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+	vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action)
 	vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>")
-	vim.keymap.set("n", "<leader>f", function()
+	vim.keymap.set("n", "<leader>lf", function()
 		vim.lsp.buf.format({
 			async = false,
 			filter = function(client)
@@ -102,7 +102,7 @@ function M.setup()
 	end)
 
 	-- ========= DIAGNOSTICS =========
-	-- vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float)
+	 vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float)
 	-- vim.keymap.set("n", "<leader>do", vim.diagnostic.setloclist)
 	-- vim.keymap.set("n", "<leader>dd", vim.diagnostic.goto_prev)
 	-- vim.keymap.set("n", "<leader>DD", vim.diagnostic.goto_next)

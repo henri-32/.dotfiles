@@ -115,12 +115,15 @@ function M.setup()
 		},
 	})
 
+    local work = function() vim.wait(100) end
+
 	Hydra({
 		name = "DAP Management",
 		mode = "n",
 		body = "<leader>d",
 		config = {
 			invoke_on_body = true,
+			on_key = work,
 			hint = {
 				position = "bottom",
 				float_opts = {
@@ -137,20 +140,20 @@ function M.setup()
 		_u_: frame up 				 _d_: frame down
 		_q_: terminate               _e_: eval
 		_bl_: logpoint               _bc_: conditional breakpoint
-		_bh_: hit breakpoint
+		_bh_: hit breakpoint         
 		
 		]],
 		heads = {
 			{ "t",  require("dapui").toggle,          { silent = true } },
-			{ "c",  require("dap").continue,          { silent = true, exit_before = true } },
-			{ "o",  require("dap").step_out,          { silent = true, exit_before = true } },
-			{ "i",  require("dap").step_into,         { silent = true, exit_before = true } },
-			{ "n",  require("dap").step_over,         { silent = true, exit_before = true } },
+			{ "c",  require("dap").continue,          { silent = true, exit_before = true} },
+			{ "o",  require("dap").step_out,          { silent = true } },
+			{ "i",  require("dap").step_into,         { silent = true } },
+			{ "n",  require("dap").step_over,         { silent = true } },
 			{ "bb", require("dap").toggle_breakpoint, { silent = true } },
-			{ "u",  require("dap").up,                { silent = true, exit_before = true } },
-			{ "d",  require("dap").down,              { silent = true, exit_before = true } },
+			{ "u",  require("dap").up,                { silent = true } },
+			{ "d",  require("dap").down,              { silent = true } },
 			{ "q",  require("dap").terminate,         { silent = true, exit = true } },
-			{ "e",  require("dapui").eval,            { silent = true, exit_before = true } },
+			{ "e",  require("dapui").eval,            { silent = true } },
 			{ "bl", function()
 				vim.ui.input({ prompt = "Log: " }, function(log)
 					require("dap").set_breakpoint(
