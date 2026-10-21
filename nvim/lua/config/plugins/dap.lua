@@ -13,7 +13,13 @@ function M.setup()
 			"--interpreter=dap",
 			"--eval-command",
 			"set print pretty on",
+			"--eval-command", "set substitute-path . " .. vim.fn.getcwd()
 		},
+	}
+
+	dap.adapters.codelldb = {
+		type = "executable",
+		command = "/usr/bin/codelldb",
 	}
 
 	local configurations = {
@@ -29,6 +35,33 @@ function M.setup()
 			type = "gdb",
 			request = "launch",
 			program = "${workspaceFolder}/autopilotGateway/build-debug/autopilotGateway",
+			cwd = "${workspaceFolder}",
+		},
+		{
+			name = "Launch heatingController_UnitTests",
+			type = "codelldb",
+			request = "launch",
+			program = "${workspaceFolder}/build_test_debug/unit_tests",
+			cwd = "${workspaceFolder}",
+		},
+		{
+			name = "Select executable",
+			type = "codelldb",
+			request = "launch",
+			program = function()
+				return coroutine.create(function(dap_run_co)
+					vim.ui.input({
+						prompt = "Executable: ",
+						default = vim.fn.getcwd() .. "/",
+						completion = "file",
+					}, function(path)
+						coroutine.resume(
+							dap_run_co,
+							path and path ~= "" and path or dap.ABORT
+						)
+					end)
+				end)
+			end,
 			cwd = "${workspaceFolder}",
 		},
 		{

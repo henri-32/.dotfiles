@@ -1,6 +1,8 @@
 local M = {}
 
 function M.setup()
+	local state = require("config.state")
+
     vim.o.paste = false
     vim.o.number = true
     vim.o.relativenumber = true
@@ -18,6 +20,9 @@ function M.setup()
     vim.o.foldmethod = "marker"
     vim.o.foldmarker = "{{{,}}}"
     vim.o.foldcolumn = "1"
+	vim.o.autocomplete = state.text_completion_enabled
+	vim.opt.complete = { ".", "b" }
+	vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
     vim.cmd("filetype indent off")
 end
 

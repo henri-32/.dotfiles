@@ -67,7 +67,7 @@ install_packages() {
 		gcc clang clang-tools-extra cmake ninja bear pkgconf ccache
 		python python-pip python-virtualenv python-pipx
 		nodejs npm jdk-openjdk
-		lua-language-server pyright ruff
+		lua-language-server pyright ruff tree-sitter-cli sqlite
 		rustup
 	)
 
@@ -89,12 +89,17 @@ install_packages() {
 		git@github.com:nvim-telescope/telescope.nvim
 		git@github.com:nvim-lua/plenary.nvim.git
 		git@github.com:stevearc/quicker.nvim.git
-		git@github.com:hrsh7th/nvim-cmp.git
 		git@github.com:neovim/nvim-lspconfig.git
 		git@github.com:mikavilpas/yazi.nvim.git
 		git@github.com:mfussenegger/nvim-dap.git
 		git@github.com:nvim-neotest/nvim-nio.git
 		git@github.com:rcarriga/nvim-dap-ui.git
+		git@github.com:nvim-treesitter/nvim-treesitter.git
+		git@github.com:folke/flash.nvim.git
+		git@github.com:folke/snacks.nvim.git
+		git@github.com:kkharji/sqlite.lua.git
+		git@github.com:LintaoAmons/bookmarks.nvim.git
+		git@github.com:nvimtools/hydra.nvim.git
 	)
 
 	"${PACMAN[@]}" "${base[@]}"
@@ -191,8 +196,7 @@ install_configs() {
 	link_config "$CONFIG_DIR/yazi" "$HOME/.config/yazi"
 	link_config "$CONFIG_DIR/tmux" "$HOME/.config/tmux"
 
-	# The current repo has a trailing space in the nvim directory name.
-	link_config "$CONFIG_DIR/nvim " "$HOME/.config/nvim"
+	link_config "$CONFIG_DIR/nvim" "$HOME/.config/nvim"
 
 	mkdir -p "$HOME/.tmux/plugins"
 	if [[ ! -d "$HOME/.tmux/plugins/tpm/.git" ]]; then

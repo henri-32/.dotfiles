@@ -1,5 +1,6 @@
 local M = {
-    autocomplete_enabled = true,
+	text_completion_enabled = false,
+	lsp_completion_enabled = false,
 }
 
 return M

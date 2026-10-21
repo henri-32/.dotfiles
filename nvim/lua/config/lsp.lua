@@ -1,6 +1,7 @@
 local M = {}
 
 function M.setup()
+	local state = require("config.state")
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.general = {
         positionEncodings = { "utf-8" },
@@ -12,6 +13,18 @@ function M.setup()
             debounce_text_changes = 400,
         },
     }
+
+	vim.api.nvim_create_autocmd("LspAttach", {
+		group = vim.api.nvim_create_augroup("native-lsp-completion", { clear = true }),
+		callback = function(args)
+			local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+			if client:supports_method("textDocument/completion") then
+				vim.lsp.completion.enable(true, client.id, args.buf, {
+					autotrigger = state.lsp_completion_enabled,
+				})
+			end
+		end,
+	})
 
     vim.lsp.config("clangd", vim.tbl_deep_extend("force", base_config, {
         cmd = {
@@ -62,6 +75,8 @@ function M.setup()
         underline = false,
         severity_sort = true,
     })
+
+   vim.keymap.set ("n", "g", vim.lsp.buf.definition)
 end
 
 return M
